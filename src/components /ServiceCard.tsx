@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { ServiceOptions } from '../utils/types';
 import { useBudget } from '../context/BudgetContext';
 
@@ -23,18 +24,32 @@ export const ServiceCard = ({ service }: ServiceCardProps) => {
     };
 
     return (
-      <div
-        className={`border rounded-lg p-6 transition-all ${
+      <motion.div
+        className={`border rounded-lg p-6 ${
           isSelected
-            ? "border-blue-500 bg-blue-50 shadow-md"
-            : "border-gray-200 hover:border-orange-500 hover:shadow-sm"
+            ? "border-blue-500 bg-blue-50"
+            : "border-gray-200"
         }`}
+        whileHover={{
+          y: -3,
+          boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)",
+          borderColor: isSelected ? "#3b82f6" : "#f97316"
+        }}
+        transition={{
+          type: "spring",
+          stiffness: 300,
+          damping: 15
+        }}
       >
         <div className="flex justify-between items-start">
           <div className="flex-1">
-            <h3 className="text-xl font-semibold text-gray-600 mb-2">
+            <motion.h3 
+              className="text-xl font-semibold text-gray-600 mb-2"
+              whileHover={{ color: isSelected ? "#2563eb" : "#f97316" }}
+              transition={{ duration: 0.2 }}
+            >
               {service.name}
-            </h3>
+            </motion.h3>
             <p className="text-gray-600 mb-4">{service.description}</p>
             <span className="text-lg font-bold text-orange-500">
               ${service.price}
@@ -51,13 +66,23 @@ export const ServiceCard = ({ service }: ServiceCardProps) => {
         </div>
 
         {isSelected && service.code === "web" && (
-          <div className="mt-4 space-y-3">
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            transition={{ 
+              type: "spring",
+              stiffness: 300,
+              damping: 20,
+              duration: 0.3
+            }}
+            className="mt-4 space-y-3 overflow-hidden"
+          >
             <div>
               <label className="block text-sm text-gray-600 mb-1">
                 Número de páginas
                 <div className="tooltip ml-2">
                 <div className="tooltip-content">
-                  <div className=" text-orange-500 -rotate-0 text-1.5xl font-bold">
+                  <div className="text-orange-500 -rotate-0 text-1.5xl font-bold">
                   El costo de cada página es de 30€.
                   </div>
                 </div>
@@ -66,31 +91,34 @@ export const ServiceCard = ({ service }: ServiceCardProps) => {
               </label>
               
               <div className="flex items-center">
-                <button
+                <motion.button
                   onClick={() => handleDecrement("pages")}
                   disabled={(selectedService?.pages || 1) <= 1}
                   className="bg-orange-500 hover:bg-orange-200 text-white font-bold py-1 px-3 rounded-l disabled:opacity-50"
+                  whileTap={{ scale: 0.95 }}
                 >
                   -
-                </button>
+                </motion.button>
                 <span className="text-gray-700 px-4 py-1 text-center">
                   {selectedService?.pages || 1}
                 </span>
-                <button
+                <motion.button
                   onClick={() => handleIncrement("pages")}
                   disabled={(selectedService?.pages || 1) >= 10}
                   className="bg-orange-500 hover:bg-orange-200 text-white font-bold py-1 px-3 rounded-r disabled:opacity-50"
+                  whileTap={{ scale: 0.95 }}
                 >
                   +
-                </button>
+                </motion.button>
               </div>
             </div>
+            
             <div>
               <label className="block text-sm text-gray-600 mb-1">
                 Número de idiomas
                 <div className="tooltip ml-2">
                 <div className="tooltip-content">
-                  <div className=" text-orange-500 -rotate-0 text-1.5xl font-bold">
+                  <div className="text-orange-500 -rotate-0 text-1.5xl font-bold">
                   El costo de cada idioma es de 30€.
                   </div>
                 </div>
@@ -98,27 +126,29 @@ export const ServiceCard = ({ service }: ServiceCardProps) => {
               </div>
               </label>
               <div className="flex items-center">
-                <button
+                <motion.button
                   onClick={() => handleDecrement("languages")}
                   disabled={(selectedService?.languages || 1) <= 1}
                   className="bg-orange-500 hover:bg-orange-200 text-white font-bold py-1 px-3 rounded-l disabled:opacity-50"
+                  whileTap={{ scale: 0.95 }}
                 >
                   -
-                </button>
+                </motion.button>
                 <span className="text-gray-700 px-4 py-1 text-center">
                   {selectedService?.languages || 1}
                 </span>
-                <button
+                <motion.button
                   onClick={() => handleIncrement("languages")}
                   disabled={(selectedService?.languages || 1) >= 4}
                   className="bg-orange-500 hover:bg-orange-200 text-white font-bold py-1 px-3 rounded-r disabled:opacity-50"
+                  whileTap={{ scale: 0.95 }}
                 >
                   +
-                </button>
+                </motion.button>
               </div>
             </div>
-          </div>
+          </motion.div>
         )}
-      </div>
+      </motion.div>
     );
 };

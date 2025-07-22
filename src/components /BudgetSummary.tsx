@@ -215,8 +215,8 @@ export const BudgetSummary = () => {
                 type="button"
                 className={`${
                   orderedBy === "DATE"
-                    ? "text-blue-900 mb-5  font-bold mr-4" // Bold if selected
-                    : "text-gray-400 mb-5 mr-4" // Normal if not selected
+                    ? "text-blue-900 mb-5  font-bold mr-4" 
+                    : "text-gray-400 mb-5 mr-4" 
                 }`}
                 onClick={orderByDate}
               >
