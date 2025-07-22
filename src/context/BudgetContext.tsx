@@ -6,12 +6,16 @@ interface BudgetContextType {
     toggleService: (service: ServiceOptions) => void;
     updateServiceDetails: (code: string, details: { pages?: number; languages?: number }) => void;
     total: number;
+    applyAnnualDiscount: () => number; // Nueva función
+    resetDiscount: () => void; // Nueva función
+    discountedTotal: number | null; // Nuevo estado
 }
 
 const BudgetContext = createContext<BudgetContextType | undefined>(undefined);
 
 export const BudgetProvider = ({ children }: { children: ReactNode }) => {
     const [selectedServices, setSelectedServices] = useState<SelectedService[]>([]);
+    const [discountedTotal, setDiscountedTotal] = useState<number | null>(null);
 
     const toggleService = (service: ServiceOptions) => {
         setSelectedServices(prev => {
@@ -19,13 +23,14 @@ export const BudgetProvider = ({ children }: { children: ReactNode }) => {
             if (isAlreadySelected) {
                 return prev.filter(s => s.code !== service.code);
             } else {
-                // Para el servicio web, añadir con valores por defecto
                 if (service.code === 'web') {
                     return [...prev, { ...service, pages: 1, languages: 1 }];
                 }
                 return [...prev, service];
             }
         });
+        // Resetear descuento al cambiar servicios
+        setDiscountedTotal(null);
     };
 
     const updateServiceDetails = (code: string, details: { pages?: number; languages?: number }) => {
@@ -34,17 +39,41 @@ export const BudgetProvider = ({ children }: { children: ReactNode }) => {
                 service.code === code ? { ...service, ...details } : service
             )
         );
+        // Resetear descuento al cambiar detalles
+        setDiscountedTotal(null);
     };
 
-    const total = selectedServices.reduce((sum, service) => {
-        let serviceTotal = service.price;
-        if (service.pages) serviceTotal += (service.pages - 1) * 30;
-        if (service.languages) serviceTotal += (service.languages - 1) * 30;
-        return sum + serviceTotal;
-    }, 0);
+    const calculateTotal = () => {
+        return selectedServices.reduce((sum, service) => {
+            let serviceTotal = service.price;
+            if (service.pages) serviceTotal += (service.pages - 1) * 30;
+            if (service.languages) serviceTotal += (service.languages - 1) * 30;
+            return sum + serviceTotal;
+        }, 0);
+    };
+
+    const total = calculateTotal();
+
+    const applyAnnualDiscount = () => {
+        const newDiscountedTotal = total * 0.8; // 20% de descuento
+        setDiscountedTotal(newDiscountedTotal);
+        return newDiscountedTotal;
+    };
+
+    const resetDiscount = () => {
+        setDiscountedTotal(null);
+    };
 
     return (
-        <BudgetContext.Provider value={{ selectedServices, toggleService, updateServiceDetails, total }}>
+        <BudgetContext.Provider value={{ 
+            selectedServices, 
+            toggleService, 
+            updateServiceDetails, 
+            total,
+            applyAnnualDiscount,
+            resetDiscount,
+            discountedTotal
+        }}>
             {children}
         </BudgetContext.Provider>
     );
