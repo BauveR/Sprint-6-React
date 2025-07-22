@@ -26,7 +26,7 @@ export const ServiceCard = ({ service }: ServiceCardProps) => {
         <div className={`border rounded-lg p-6 transition-all ${
             isSelected 
                 ? 'border-blue-500 bg-blue-50 shadow-md' 
-                : 'border-gray-200 hover:border-pink-400 hover:shadow-sm'
+                : 'border-gray-200 hover:border-orange-500 hover:shadow-sm'
         }`}>
             <div className="flex justify-between items-start">
                 <div className="flex-1">
@@ -74,7 +74,7 @@ export const ServiceCard = ({ service }: ServiceCardProps) => {
                             <button 
                                 onClick={() => handleDecrement('languages')}
                                 disabled={(selectedService?.languages || 1) <= 1}
-                                className="bg-orange-500 hover:bg-orange-200 text-gray-700 font-bold py-1 px-3 rounded-l disabled:opacity-50"
+                                className="bg-orange-500 hover:bg-orange-200 text-white font-bold py-1 px-3 rounded-l disabled:opacity-50"
                             >
                                 -
                             </button>
@@ -84,7 +84,7 @@ export const ServiceCard = ({ service }: ServiceCardProps) => {
                             <button 
                                 onClick={() => handleIncrement('languages')}
                                 disabled={(selectedService?.languages || 1) >= 4}
-                                className="bg-orange-500 hover:bg-orange-200 text-gray-700 font-bold py-1 px-3 rounded-r disabled:opacity-50"
+                                className="bg-orange-500 hover:bg-orange-200 text-white font-bold py-1 px-3 rounded-r disabled:opacity-50"
                             >
                                 +
                             </button>

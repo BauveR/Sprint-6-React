@@ -11,7 +11,7 @@ export const Home = () => {
             <div className="max-w-6xl mx-auto px-4 py-8">
                 <div className="flex flex-col lg:flex-row gap-8">
                     <div className="lg:w-2/3">
-                        <h2 className="text-2xl font-bold text-gray-800 mb-6">Nuestros Servicios</h2>
+                        <h2 className="text-2xl font-bold text-blue-800 mb-6">Nuestros Servicios</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {SERVICES.map(service => (
                                 <ServiceCard
