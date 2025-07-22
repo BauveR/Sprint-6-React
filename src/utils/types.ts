@@ -3,21 +3,10 @@ export interface ServiceOptions {
     description: string;
     code: string;
     price: number;
+    hasCustomOptions?: boolean;
 }
 
-export interface Budget {
-    id: string;
-    name: string;
-    email: string;
-    phone: string;
-    services: ServiceOptions[];
-    webDetails?: WebsiteDetails;
-    price: number;
-    date: string;
-    annualDiscount: boolean;
-}
-
-export interface WebsiteDetails {
-    pages: number;
-    languages: number;
+export interface SelectedService extends ServiceOptions {
+    pages?: number;
+    languages?: number;
 }

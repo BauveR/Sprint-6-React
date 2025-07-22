@@ -1,5 +1,5 @@
 import { SERVICES } from '../utils/Data';
-import { ServiceCard } from '../components /ServiceCard'
+import { ServiceCard } from '../components /ServiceCard';
 import { BudgetSummary } from '../components /BudgetSummary';
 import { Header } from '../components /Header';
 

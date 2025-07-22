@@ -1,9 +1,4 @@
-interface ServiceOptions {
-    name: string;
-    description: string;
-    code: string;
-    price: number;
-}
+import { ServiceOptions } from './types';
 
 export const SERVICES: ServiceOptions[] = [
     {
@@ -22,6 +17,7 @@ export const SERVICES: ServiceOptions[] = [
         name: 'Website Development',
         description: 'Design and develop a professional website tailored to your business needs.',
         code: 'web',
-        price: 500
+        price: 500,
+        hasCustomOptions: true
     }
 ];
