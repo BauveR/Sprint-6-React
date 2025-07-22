@@ -51,7 +51,7 @@ export const BudgetSummary = () => {
 
     return (
       <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200 sticky top-6">
-        <h2 className="text-2xl font-bold text-gray-800 mb-4">
+        <h2 className="text-2xl font-bold text-gray-600 mb-4">
           Resumen del Presupuesto
         </h2>
 
@@ -64,7 +64,7 @@ export const BudgetSummary = () => {
                 <li key={service.code} className="py-3">
                   <div className="flex justify-between">
                     <span className="text-gray-700">{service.name}</span>
-                    <span className="font-medium">${service.price}</span>
+                    <span className="font-bold text-gray-600">${service.price}</span>
                   </div>
                   {service.pages && service.pages > 1 && (
                     <div className="text-sm text-gray-500">
@@ -94,7 +94,7 @@ export const BudgetSummary = () => {
                     <span>Descuento anual (20%):</span>
                     <span>-${(total - discountedTotal).toFixed(2)}</span>
                   </div>
-                  <div className="flex justify-between font-bold">
+                  <div className="flex justify-between text-green-600 font-bold">
                     <span>Total con descuento:</span>
                     <span className="text-green-600">
                       ${discountedTotal.toFixed(2)}
@@ -102,7 +102,7 @@ export const BudgetSummary = () => {
                   </div>
                   <button
                     onClick={resetDiscount}
-                    className="w-full mt-2 bg-gray-200 hover:bg-gray-300 text-whithe-800 py-2 px-4 rounded"
+                    className="w-full mt-2 bg-gray-200 hover:bg-gray-300 text-gray-600 py-2 px-4 rounded"
                   >
                     Quitar descuento
                   </button>
@@ -137,7 +137,7 @@ export const BudgetSummary = () => {
                     value={customerInfo.name}
                     onChange={handleInputChange}
                     placeholder="Nombre completo"
-                    className="w-full p-2 border rounded"
+                    className="w-full p-2 border border-amber-600 rounded text-gray-600 "
                     required
                   />
                   <input
@@ -146,7 +146,7 @@ export const BudgetSummary = () => {
                     value={customerInfo.email}
                     onChange={handleInputChange}
                     placeholder="Email"
-                    className="w-full p-2 border rounded"
+                    className="w-full p-2 border  border-amber-600 rounded text-gray-600"
                     required
                   />
                   <input
@@ -155,7 +155,7 @@ export const BudgetSummary = () => {
                     value={customerInfo.phone}
                     onChange={handleInputChange}
                     placeholder="Teléfono"
-                    className="w-full p-2 border rounded"
+                    className="w-full p-2 border  border-amber-600 rounded text-gray-600"
                     required
                   />
                   <div className="flex space-x-2">
@@ -173,7 +173,7 @@ export const BudgetSummary = () => {
                     <button
                       type="button"
                       onClick={() => setShowForm(false)}
-                      className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 py-2 px-4 rounded"
+                      className="flex-1 bg-gray-200 hover:bg-gray-200 text-gray-800 py-2 px-4 rounded"
                     >
                       Cancelar
                     </button>
@@ -204,26 +204,26 @@ export const BudgetSummary = () => {
                 type="button"
                 className={`${
                   orderedBy === "NAME"
-                    ? "bg-blue-50 shadow-md font-bold" // Bold if selected
-                    : "border-gray-200" // Normal if not selected
+                    ? " text-blue-900 mb-5  font-bold mr-4" 
+                    : " text-gray-400 mb-5 mr-4" 
                 }`}
                 onClick={ordenarPorNombre}
               >
-                Nombre
+               ▼ Nombre
               </button>
               <button
                 type="button"
                 className={`${
                   orderedBy === "DATE"
-                    ? "bg-blue-50 shadow-md font-bold" // Bold if selected
-                    : "border-gray-200" // Normal if not selected
+                    ? "text-blue-900 mb-5  font-bold mr-4" // Bold if selected
+                    : "text-gray-400 mb-5 mr-4" // Normal if not selected
                 }`}
                 onClick={orderByDate}
               >
-                Fecha
+                ▼ Fecha
               </button>
             </div>
-            <div className="space-y-4 max-h-96 overflow-y-auto pr-2">
+            <div className=" text-orange-600 space-y-4 max-h-96 overflow-y-auto pr-2">
               {savedFilteredBudgets.map((budget, index) => (
                 <div key={index} className="border rounded-lg p-4 bg-gray-50">
                   <div className="font-medium">{budget.customerInfo.name}</div>
@@ -234,7 +234,7 @@ export const BudgetSummary = () => {
                     {budget.customerInfo.phone}
                   </div>
                   <div className="mt-2 text-sm">
-                    <span className="font-medium">Servicios:</span>{" "}
+                    <span className="font-medium  text-gray-500">Servicios:</span>{" "}
                     {budget.services.map((s) => s.name).join(", ")}
                   </div>
                   {budget.services.find((s) => s.code === "web") && (
@@ -247,7 +247,7 @@ export const BudgetSummary = () => {
                       idiomas
                     </div>
                   )}
-                  <div className="mt-1 font-medium">
+                  <div className="mt-1 font-bold  text-orange-600">
                     Total: $
                     {budget.discountedTotal
                       ? budget.discountedTotal.toFixed(2)
