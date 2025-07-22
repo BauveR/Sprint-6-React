@@ -26,13 +26,13 @@ export const ServiceCard = ({ service }: ServiceCardProps) => {
         <div className={`border rounded-lg p-6 transition-all ${
             isSelected 
                 ? 'border-blue-500 bg-blue-50 shadow-md' 
-                : 'border-gray-200 hover:border-blue-300 hover:shadow-sm'
+                : 'border-gray-200 hover:border-pink-400 hover:shadow-sm'
         }`}>
             <div className="flex justify-between items-start">
                 <div className="flex-1">
-                    <h3 className="text-xl font-semibold text-gray-800 mb-2">{service.name}</h3>
+                    <h3 className="text-xl font-semibold text-gray-600 mb-2">{service.name}</h3>
                     <p className="text-gray-600 mb-4">{service.description}</p>
-                    <span className="text-lg font-bold text-blue-900">${service.price}</span>
+                    <span className="text-lg font-bold text-orange-500">${service.price}</span>
                 </div>
                 <label className="inline-flex items-center cursor-pointer">
                     <input 
@@ -51,16 +51,18 @@ export const ServiceCard = ({ service }: ServiceCardProps) => {
                         <div className="flex items-center">
                             <button 
                                 onClick={() => handleDecrement('pages')}
-                                className="bg-gray-200 hover:bg-gray-300 text-white font-bold py-1 px-3 rounded-l"
+                                disabled={(selectedService?.pages || 1) <= 1}
+                                className="bg-orange-500 hover:bg-orange-200 text-white font-bold py-1 px-3 rounded-l disabled:opacity-50"
                             >
                                 -
                             </button>
-                            <span className="text-gray-500 px-4 py-1 text-center">
+                            <span className="text-gray-700 px-4 py-1 text-center">
                                 {selectedService?.pages || 1}
                             </span>
                             <button 
                                 onClick={() => handleIncrement('pages')}
-                                className="bg-gray-200 hover:bg-gray-300 text-white font-bold py-1 px-3 rounded-r"
+                                disabled={(selectedService?.pages || 1) >= 10}
+                                className="bg-orange-500 hover:bg-orange-200 text-white font-bold py-1 px-3 rounded-r disabled:opacity-50"
                             >
                                 +
                             </button>
@@ -71,16 +73,18 @@ export const ServiceCard = ({ service }: ServiceCardProps) => {
                         <div className="flex items-center">
                             <button 
                                 onClick={() => handleDecrement('languages')}
-                                className="bg-gray-400 hover:bg-gray-300 text-white font-bold py-1 px-3 rounded-l"
+                                disabled={(selectedService?.languages || 1) <= 1}
+                                className="bg-orange-500 hover:bg-orange-200 text-gray-700 font-bold py-1 px-3 rounded-l disabled:opacity-50"
                             >
                                 -
                             </button>
-                            <span className="text-gray-500 px-4 py-1 text-center">
+                            <span className="text-gray-700 px-4 py-1 text-center">
                                 {selectedService?.languages || 1}
                             </span>
                             <button 
                                 onClick={() => handleIncrement('languages')}
-                                className="bg-gray-200 hover:bg-gray-300 text-white font-bold py-1 px-3 rounded-r"
+                                disabled={(selectedService?.languages || 1) >= 4}
+                                className="bg-orange-500 hover:bg-orange-200 text-gray-700 font-bold py-1 px-3 rounded-r disabled:opacity-50"
                             >
                                 +
                             </button>
