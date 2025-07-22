@@ -6,9 +6,9 @@ export const Header = () => {
             <div className="max-w-6xl mx-auto flex flex-col justify-between h-full">
                 <div className="flex justify-between items-start mb-8">
                     <div>
-                    <h1 className="text-2xl mt-8 md:text-1xl font-bold pl-7 mb-1">CREA TU PRESUPUESTO</h1>
-                    <h1 className="text-20xl md:text-8xl font-bold mb-4">AHORA</h1>
-                        <p className="text-orange-300 font-bold text-2xl">Selecciona los servicios que te gustaría desarrollar</p>
+                    <h1 className="text-2xl mt-8 md:text-1xl font-bold pl-9 mb-1">CREA TU PRESUPUESTO</h1>
+                    <h1 className="text-20xl md:text-8xl font-bold mb-1 pl-4">AHORA</h1>
+                        <p className="text-orange-300 font-medium text-xl pl-2 ">Selecciona los servicios que te gustaría desarrollar</p>
                     </div>
                     <Link 
                         to="/" 
