@@ -10,3 +10,4 @@ export interface SelectedService extends ServiceOptions {
     pages?: number;
     languages?: number;
 }
+

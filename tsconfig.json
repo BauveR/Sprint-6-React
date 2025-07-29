@@ -1,4 +1,12 @@
 {
+  "compilerOptions": {
+    "composite": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "jsx": "preserve"
+  },
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },

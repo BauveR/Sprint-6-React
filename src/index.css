@@ -1,8 +1,4 @@
 @import "tailwindcss";
-@plugin "daisyui";
-@layer base {
-  h1 {
-    font-family: 'Monoton', cursive;
-  }
-}
+
+
 

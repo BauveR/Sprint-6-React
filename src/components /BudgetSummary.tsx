@@ -122,7 +122,7 @@ export const BudgetSummary = () => {
               {!showForm ? (
                 <button
                   onClick={() => setShowForm(true)}
-                  className="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded"
+                  className="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 full-rounded disabled:opacity-50"
                 >
                   Guardar Presupuesto
                 </button>

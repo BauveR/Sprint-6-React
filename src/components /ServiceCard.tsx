@@ -55,12 +55,12 @@ export const ServiceCard = ({ service }: ServiceCardProps) => {
               ${service.price}
             </span>
           </div>
-          <label className="inline-flex items-center cursor-pointer">
+          <label className="inline-flex  items-center cursor-pointer">
             <input
               type="checkbox"
               checked={isSelected}
               onChange={() => toggleService(service)}
-              className="form-checkbox h-6 w-6 text-blue-600 rounded focus:ring-blue-500"
+              className=" text-blue-600 form-checkbox h-6 w-6 rounded"
             />
           </label>
         </div>
@@ -77,19 +77,7 @@ export const ServiceCard = ({ service }: ServiceCardProps) => {
             }}
             className="mt-4 space-y-3 overflow-hidden"
           >
-            <div>
-              <label className="block text-sm text-gray-600 mb-1">
-                Número de páginas
-                <div className="tooltip ml-2">
-                <div className="tooltip-content">
-                  <div className="text-orange-500 -rotate-0 text-1.5xl font-bold">
-                  El costo de cada página es de 30€.
-                  </div>
-                </div>
-                <button className="btn-white rounded-full text-blue-500">ⓘ</button>
-              </div>
-              </label>
-              
+             <div>
               <div className="flex items-center">
                 <motion.button
                   onClick={() => handleDecrement("pages")}
@@ -114,17 +102,7 @@ export const ServiceCard = ({ service }: ServiceCardProps) => {
             </div>
             
             <div>
-              <label className="block text-sm text-gray-600 mb-1">
-                Número de idiomas
-                <div className="tooltip ml-2">
-                <div className="tooltip-content">
-                  <div className="text-orange-500 -rotate-0 text-1.5xl font-bold">
-                  El costo de cada idioma es de 30€.
-                  </div>
-                </div>
-                <button className="btn-white rounded-full text-blue-500">ⓘ</button>
-              </div>
-              </label>
+        
               <div className="flex items-center">
                 <motion.button
                   onClick={() => handleDecrement("languages")}
