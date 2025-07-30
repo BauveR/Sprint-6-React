@@ -23,13 +23,13 @@ export interface HeaderOptions {
   }
   
   export interface Budget {
-    id: string;
     customerInfo: CustomerInfo;
     services: SelectedService[];
     total: number;
     discountedTotal: number | null;
     date: Date;
   }
+  
 
   export interface BudgetContextType {
     selectedServices: SelectedService[];
@@ -52,13 +52,6 @@ export interface HeaderOptions {
   }
   
   
-  export interface BudgetRecord {
-    customerInfo: CustomerInfo;
-    services: SelectedService[];
-    total: number;
-    discountedTotal: number | null;
-    date: Date;
-  }
-  
+
   
   

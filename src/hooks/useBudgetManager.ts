@@ -1,19 +1,20 @@
 import { useState } from "react";
-import { SelectedService, BudgetRecord } from "../types/types";
+import { SelectedService, Budget } from "../types/types";
+
 
 export const useBudgetManager = (selectedServices: SelectedService[]) => {
-  const [savedBudgets, setSavedBudgets] = useState<BudgetRecord[]>([]);
-  const [savedFilteredBudgets, setSavedFilteredBudgets] = useState<BudgetRecord[]>([]);
+  const [savedBudgets, setSavedBudgets] = useState<Budget[]>([]);
+  const [savedFilteredBudgets, setSavedFilteredBudgets] = useState<Budget[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [orderedBy, setOrderedBy] = useState('');
 
   const saveBudget = (
-    customerInfo: BudgetRecord['customerInfo'],
+    customerInfo: Budget['customerInfo'],
     discountedTotalFromHook: number | null
   ) => {
     const total = selectedServices.reduce((sum, s) => sum + s.price, 0);
 
-    const newBudget: BudgetRecord = {
+    const newBudget: Budget = {
       customerInfo,
       services: [...selectedServices],
       total,
