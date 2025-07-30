@@ -6,7 +6,7 @@ This is a web application built with **React**, **TypeScript**, **TailwindCSS**,
 
 ## 🚀 Demo
 
-Coming soon...
+![App Demo](./public/Screen%20Recording%202025-07-30%20at%206.51.56%E2%80%AFp.gif)
 
 ---
 
