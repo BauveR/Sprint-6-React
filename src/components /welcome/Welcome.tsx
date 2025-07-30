@@ -8,6 +8,7 @@ export const Welcome = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollEndRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+  
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
