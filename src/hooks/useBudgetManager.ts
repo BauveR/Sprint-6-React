@@ -1,19 +1,17 @@
-import { useState } from "react";
+// src/hooks/useBudgetManager.ts
+import { useState, useMemo } from "react";
 import { SelectedService, Budget } from "../types/types";
 
-
 export const useBudgetManager = (selectedServices: SelectedService[]) => {
-  const [savedBudgets, setSavedBudgets] = useState<Budget[]>([]);
-  const [savedFilteredBudgets, setSavedFilteredBudgets] = useState<Budget[]>([]);
+  const [budgets, setBudgets] = useState<Budget[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [orderedBy, setOrderedBy] = useState('');
+  const [orderedBy, setOrderedBy] = useState<'NAME' | 'DATE' | ''>('');
 
   const saveBudget = (
     customerInfo: Budget['customerInfo'],
     discountedTotalFromHook: number | null
   ) => {
     const total = selectedServices.reduce((sum, s) => sum + s.price, 0);
-  
     const newBudget: Budget = {
       customerInfo,
       services: [...selectedServices],
@@ -21,62 +19,44 @@ export const useBudgetManager = (selectedServices: SelectedService[]) => {
       discountedTotal: discountedTotalFromHook,
       date: new Date(),
     };
-  
-    const updatedBudgets = [newBudget, ...savedBudgets];
-  
-    let filtered: Budget[];
-    if (searchTerm === '') {
-      filtered = [...updatedBudgets];
-    } else {
-      filtered = updatedBudgets.filter(b =>
-        b.customerInfo.name.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    }
-  
-    if (orderedBy === 'NAME') {
-      updatedBudgets.sort((a, b) => a.customerInfo.name.localeCompare(b.customerInfo.name));
-      filtered.sort((a, b) => a.customerInfo.name.localeCompare(b.customerInfo.name));
-    }
-  
-    if (orderedBy === 'DATE') {
-      updatedBudgets.sort((a, b) => b.date.getTime() - a.date.getTime());
-      filtered.sort((a, b) => b.date.getTime() - a.date.getTime());
-    }
-  
-    setSavedBudgets(updatedBudgets);
-    setSavedFilteredBudgets(filtered);
+    setBudgets(prev => [newBudget, ...prev]);
   };
-  
+
+  const filterBudgets = (term: string) => {
+    setSearchTerm(term.toLowerCase());
+  };
 
   const ordenarPorNombre = () => {
-    setSavedBudgets(prev => [...prev].sort((a, b) => a.customerInfo.name.localeCompare(b.customerInfo.name)));
-    setSavedFilteredBudgets(prev => [...prev].sort((a, b) => a.customerInfo.name.localeCompare(b.customerInfo.name)));
     setOrderedBy('NAME');
   };
 
   const orderByDate = () => {
-    setSavedBudgets(prev => [...prev].sort((a, b) => b.date.getTime() - a.date.getTime()));
-    setSavedFilteredBudgets(prev => [...prev].sort((a, b) => b.date.getTime() - a.date.getTime()));
     setOrderedBy('DATE');
   };
 
-  const filterBudgets = (term: string) => {
-    setSearchTerm(term);
-    if (term === '') {
-      setSavedFilteredBudgets([...savedBudgets]);
-      return;
+  const savedFilteredBudgets = useMemo(() => {
+    let filtered = [...budgets];
+    if (searchTerm !== '') {
+      filtered = filtered.filter(b =>
+        b.customerInfo.name.toLowerCase().includes(searchTerm)
+      );
     }
-    setSavedFilteredBudgets(
-      savedBudgets.filter(b => b.customerInfo.name.toLowerCase().includes(term.toLowerCase()))
-    );
-  };
+
+    if (orderedBy === 'NAME') {
+      filtered.sort((a, b) => a.customerInfo.name.localeCompare(b.customerInfo.name));
+    } else if (orderedBy === 'DATE') {
+      filtered.sort((a, b) => b.date.getTime() - a.date.getTime());
+    }
+
+    return filtered;
+  }, [budgets, searchTerm, orderedBy]);
 
   return {
     saveBudget,
     ordenarPorNombre,
     orderByDate,
     filterBudgets,
-    savedBudgets,
+    savedBudgets: budgets,
     savedFilteredBudgets,
     orderedBy,
   };
