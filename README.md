@@ -68,3 +68,12 @@ Save and list budgets
 Filter and sort by name or date
 Generate shareable budget URLs
 Fully unit-tested with Vitest and React Testing Library
+
+### 🤝 Contributions
+
+Contributions are welcome.
+
+## ⏳ Project Status
+
+Project developed as part of a React and web design learning exercise 
+The folder organization and document arrangement will be enhanced.
