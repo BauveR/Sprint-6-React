@@ -2,6 +2,8 @@ import { motion } from 'framer-motion';
 import { ServiceOptions } from '../../types/types';
 import { useBudget } from '../../context/BudgetProvider';
 import { QuantityButtons } from './QuantityButtons';
+import toast from 'react-hot-toast';
+
 
 interface ServiceCardProps {
   service: ServiceOptions;
@@ -58,30 +60,41 @@ export const ServiceCard = ({ service }: ServiceCardProps) => {
         </div>
   
         {isSelected && service.code === 'web' && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-            className="mt-4 space-y-3 overflow-hidden"
-          >
-            <QuantityButtons
-              label="Páginas"
-              value={selectedService?.pages || 1}
-              onIncrement={() => handleIncrement('pages')}
-              onDecrement={() => handleDecrement('pages')}
-              min={1}
-              max={10}
-            />
-            <QuantityButtons
-              label="Idiomas"
-              value={selectedService?.languages || 1}
-              onIncrement={() => handleIncrement('languages')}
-              onDecrement={() => handleDecrement('languages')}
-              min={1}
-              max={4}
-            />
-          </motion.div>
-        )}
+  <motion.div
+    initial={{ opacity: 0, height: 0 }}
+    animate={{ opacity: 1, height: 'auto' }}
+    transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+    className="mt-4 space-y-3 overflow-hidden"
+  >
+    <QuantityButtons
+      label="Páginas"
+      value={selectedService?.pages || 1}
+      onIncrement={() => handleIncrement('pages')}
+      onDecrement={() => handleDecrement('pages')}
+      min={1}
+      max={10}
+    />
+    <QuantityButtons
+      label="Idiomas"
+      value={selectedService?.languages || 1}
+      onIncrement={() => handleIncrement('languages')}
+      onDecrement={() => handleDecrement('languages')}
+      min={1}
+      max={4}
+    />
+
+    {/* Botón para mostrar el toast */}
+    <div className="flex justify-end pt-2">
+      <button
+        onClick={() => toast('El costo por página es de 30€')}
+        className="text-sm text-blue-400 hover:underline"
+      >
+        ¿Costo por página o por idioma?
+      </button>
+    </div>
+  </motion.div>
+)}
+
       </motion.div>
     );
   };
