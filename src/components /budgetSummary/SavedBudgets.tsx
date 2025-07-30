@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { Budget } from '../../types/types';
+import { Toast } from '../toast/Toast';
 
 interface SavedBudgetsProps {
   budgets: Budget[];
@@ -13,6 +15,8 @@ export const SavedBudgets = ({
   onOrderByName,
   onOrderByDate,
 }: SavedBudgetsProps) => {
+  const [showToast, setShowToast] = useState(false);
+
   const formatDate = (date: Date) =>
     new Date(date).toLocaleString('en-GB', {
       day: '2-digit',
@@ -21,6 +25,16 @@ export const SavedBudgets = ({
       hour: '2-digit',
       minute: '2-digit',
     });
+
+  const handleCopyLink = (budget: Budget) => {
+    const query = `name=${encodeURIComponent(budget.customerInfo.name)}&services=${budget.services
+      .map(s => s.code)
+      .join(',')}&total=${budget.total.toFixed(2)}&discount=${budget.discountedTotal?.toFixed(2) ?? ''}`;
+
+    const url = `${window.location.origin}/shared-budget?${query}`;
+    navigator.clipboard.writeText(url);
+    setShowToast(true);
+  };
 
   return (
     <div className="mt-6">
@@ -71,24 +85,21 @@ export const SavedBudgets = ({
               )}
             </div>
 
-            <div className="text-xs text-gray-500 mt-1">
-              {formatDate(budget.date)}
-            </div>
+            <div className="text-xs text-gray-500 mt-1">{formatDate(budget.date)}</div>
 
             <button
-              onClick={() => {
-                const query = `name=${encodeURIComponent(budget.customerInfo.name)}&services=${budget.services.map(s => s.code).join(',')}&total=${budget.total.toFixed(2)}&discount=${budget.discountedTotal?.toFixed(2) ?? ''}`;
-                const url = `${window.location.origin}/shared-budget?${query}`;
-                navigator.clipboard.writeText(url);
-                alert("Link copied to clipboard");
-              }}
+              onClick={() => handleCopyLink(budget)}
               className="bg-orange-500 hover:bg-blue-100 text-white font-extrabold py-1.5 px-3 rounded-full transition-all duration-300 mt-6"
-              >
+            >
               Share
             </button>
           </div>
         ))}
       </div>
+
+      {showToast && (
+        <Toast message="¡Enlace copiado al portapapeles!" onClose={() => setShowToast(false)} />
+      )}
     </div>
   );
 };

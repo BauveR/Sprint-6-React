@@ -5,6 +5,7 @@ import { TotalSection } from './TotalSection';
 import { CustomerForm } from './CustomerForm';
 import { SavedBudgets } from './SavedBudgets';
 import { SearchBar } from './SearchBar';
+import { Toast } from '../toast/Toast';
 
 export const BudgetSummary = () => {
   const {
@@ -23,7 +24,7 @@ export const BudgetSummary = () => {
 
   const [customerInfo, setCustomerInfo] = useState({ name: '', email: '', phone: '' });
   const [showForm, setShowForm] = useState(false);
-
+  const [showToast, setShowToast] = useState(false); 
   const handleSave = () => setShowForm(true);
   const handleCancel = () => setShowForm(false);
 
@@ -32,7 +33,7 @@ export const BudgetSummary = () => {
     saveBudget(customerInfo, discountedTotal);
     setCustomerInfo({ name: '', email: '', phone: '' });
     setShowForm(false);
-  };  
+  };
 
   const generateSharedURL = () => {
     const name = encodeURIComponent(customerInfo.name);
@@ -65,7 +66,7 @@ export const BudgetSummary = () => {
               onClick={() => {
                 const url = generateSharedURL();
                 navigator.clipboard.writeText(url);
-                alert("Link copied to clipboard");
+                setShowToast(true); 
               }}
               className="w-full mt-2 bg-blue-100 hover:bg-blue-200 text-blue-800 py-2 px-4 rounded-full"
             >
@@ -76,7 +77,7 @@ export const BudgetSummary = () => {
           {!showForm ? (
             <button
               onClick={handleSave}
-              className="w-full mt-6 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-full "
+              className="w-full mt-6 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-full"
             >
               Save budget
             </button>
@@ -100,6 +101,10 @@ export const BudgetSummary = () => {
           onOrderByName={ordenarPorNombre}
           onOrderByDate={orderByDate}
         />
+      )}
+
+      {showToast && (
+        <Toast message="¡Enlace copiado al portapapeles!" onClose={() => setShowToast(false)} />
       )}
     </div>
   );
