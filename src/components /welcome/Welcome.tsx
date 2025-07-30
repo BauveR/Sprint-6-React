@@ -63,7 +63,7 @@ export const Welcome = () => {
         </motion.div>
       </motion.div>
 
-      {/* Punto de activación al hacer scroll */}
+
       <div
         ref={scrollEndRef}
         className="absolute top-[100vh] w-full min-h-screen bg-gray-50 flex items-center justify-center"
