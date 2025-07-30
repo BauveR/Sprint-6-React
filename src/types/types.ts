@@ -41,7 +41,7 @@ export interface HeaderOptions {
     applyAnnualDiscount: () => number;
     resetDiscount: () => void;
   
-    saveBudget: (customerInfo: CustomerInfo) => void;
+    saveBudget: (customerInfo: CustomerInfo, discountedTotal: number | null) => void;
     ordenarPorNombre: () => void;
     orderByDate: () => void;
     filterBudgets: (term: string) => void;
@@ -50,6 +50,7 @@ export interface HeaderOptions {
     savedFilteredBudgets: Budget[];
     orderedBy: string; // 'NAME' | 'DATE'
   }
+  
   
   export interface BudgetRecord {
     customerInfo: CustomerInfo;

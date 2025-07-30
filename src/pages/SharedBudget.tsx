@@ -9,12 +9,12 @@ export const SharedBudget = () => {
   const discount = params.get('discount');
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center p-6">
+    <div className="min-h-screen bg-orange-400 flex items-center justify-center p-6">
       <div className="bg-white p-8 max-w-2xl w-full shadow-lg rounded-2xl border border-gray-200">
         <h2 className="text-3xl font-bold text-orange-600 mb-6 border-b pb-4">Presupuesto Detallado</h2>
 
         <div className="space-y-2 mb-6">
-          <p className="text-gray-500 text-lg font-medium">
+          <p className="text-gray-700 text-lg font-medium">
             <span className="font-semibold">Cliente:</span> {name}
           </p>
         </div>
@@ -32,12 +32,12 @@ export const SharedBudget = () => {
 
         <hr className="my-4 border-gray-300" />
 
-        <div className="text-gray-800 text-lg">
+        <div className="text-gray-500 text-lg">
           <p>
             <span className="font-black">Total:</span> ${total}
           </p>
           {discount && (
-            <p className="text-green-700 font-semibold mt-2">
+            <p className="text-xl  text-green-600 font-bold mt-2">
               Total con descuento: ${discount}
             </p>
           )}

@@ -29,10 +29,10 @@ export const BudgetSummary = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    saveBudget(customerInfo);
+    saveBudget(customerInfo, discountedTotal);
     setCustomerInfo({ name: '', email: '', phone: '' });
     setShowForm(false);
-  };
+  };  
 
   const generateSharedURL = () => {
     const name = encodeURIComponent(customerInfo.name);
