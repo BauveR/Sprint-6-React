@@ -48,6 +48,7 @@ npm install --save-dev vitest @testing-library/react @testing-library/jest-dom j
 
 ## 📁 Project Structure
 
+```txt
 src/
 ├── components/         # Reusable UI components
 ├── context/            # Global state and context providers
@@ -57,6 +58,7 @@ src/
 ├── App.tsx             # App router setup
 ├── main.tsx            # App entry point
 └── index.css           # Tailwind and base styles
+```
 
 
 ## ✅ Features
